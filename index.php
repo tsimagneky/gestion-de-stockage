@@ -6,6 +6,57 @@
 		<title> Se Connecter - Animalerie de Madagascar </title>
 	</head>
 	<body>
+    <?php
+$erreur = '';
+if(isset($_POST["connection"]))
+{
+    if(isset($_POST["user"]))
+    {
+        if(isset($_POST["password"]))
+        {
+          
+            try
+            {
+                $bdd = new PDO('mysql:host=localhost;dbname=gestion_staock', 'sserver', 'sserver');
+            }       
+            catch (Exception $e)
+            {
+                die('Erreur : '.$e->getMessage());
+            }
+            $recupere_bdd = $bdd -> query('SELECT user_name, email, mdp from utilisateur');
+            while($ligne_bdd = $recupere_bdd->fetch())
+            {
+                if(($_POST["user"]==$ligne_bdd["user_name"])||($_POST["user"]==$ligne_bdd["emai"]))
+                {
+                    $user_correcte = true;
+                    if($_POST["password"]==$ligne_bdd["mdp"])
+                    {
+                        header('Location: Succee.php');    
+                    }
+                    else
+                    {
+                        echo '<span id="Erreur_connection">Mot de passe incorrecte</span>';
+                    }
+                  
+                }
+                
+            }
+            if($user_correcte!=true)
+            {
+                echo'Nom d\'utilisateur ou mail incorrecte';
+            }
+        }
+        else
+        {
+            echo'Remplir le mot de passe';
+        }
+    }
+    else
+    {
+        echo'Remplir le nom d\'utilisateur ou mail';
+    }
+}
+?>
 		<style>
 		body{
             background-color: rgb(186, 235, 186);
@@ -103,7 +154,12 @@
                 opacity:1;
                 display: inline;
                 margin-left : 4.6%;
-                }            
+                }
+            #Erreur_connection{
+                position: fixed;
+                
+                top:100px;
+            }           
             .h4{
                 position:fixed; left:170px; 
                 top:500px;
@@ -183,12 +239,12 @@
 		<div class="conteneur1">
                     <div class="h1"> <strong> Se connecter </strong>  </div>
                     <div class="h2">  Nom d'utilisateur ou adresse email </div>
-                    <form action='connection.php' method="post">
+                    <form action='index.php' method="post">
                         <input name="connect" type="hidden" value="1">
-                        <input class="mail" type="mail" name="mail">
+                        <input class="mail" type="text" name="user" required>
                  
                         <div class="h2">  Mot de passe  </div>
-                        <input class="pass" type="password" name="password">
+                        <input class="pass" type="password" name="password" required>
                         <button class="login" type="submit" name="connection"> <b> Se connecter </b></button>
                         <div class="h4" id='oublie'> <strong> Mot de passe oublié ? </strong> </div>
                     </form>
@@ -198,7 +254,7 @@
          
         <div class="conteneur2">
          		<div class="h1"><strong>S'incrire</strong></div>
-         		<form action='inscription.php' method='post'> 
+         		<form action='index.php' method='post'> 
          		    <div class="h2"> Nom d'utilisateur</div>
                     <input class="mail" type="text" name="username" required>
                     <div class="h2"> Adresse email</div>
