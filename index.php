@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <script scr="js/jquery-1.3.2.js"></script>
+    <script scr="js/jquery-1.3.2.js"></script> <!-- Integration de Jquery!!! -->
     <script scr="bootstrap/dist/js/bootstrap.min.js"></script>
     <link type="text/css" rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="css/style.css">
