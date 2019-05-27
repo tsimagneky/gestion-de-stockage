@@ -37,7 +37,7 @@ if(isset($_POST["connection"]))
                     $user_correcte = true;
                     if( hash("sha512", $_POST["password"]) == $ligne_bdd["mdp"])
                     {
-                        header('Location: Succee.php');    
+                        header('Location: home.php');    
                     }
                     else
                     {
