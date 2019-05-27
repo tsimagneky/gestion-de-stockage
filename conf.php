@@ -1,5 +1,6 @@
 <?php
     $hn="localhost";
-    $un="animalerie";
-    $pw="animmalerie";
+    $un="stock";
+    $pw="stocks";
+    $db="stock";
 ?>

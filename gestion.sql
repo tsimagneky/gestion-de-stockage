@@ -18,17 +18,22 @@
 --
 -- Table structure for table `utilisateur`
 --
-
+DROP DATABASE IF EXISTS stock;
+CREATE DATABASE IF NOT EXISTS stock;
+CREATE USER IF NOT EXISTS stock IDENTIFIED BY 'stocks';
+GRANT ALL PRIVILEGES ON stock.* to 'stock';
+FLUSH PRIVILEGES;
+USE stock;
 DROP TABLE IF EXISTS `utilisateur`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `utilisateur` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(32) NOT NULL,
-  `email` varchar(52) NOT NULL,
-  `mdp` varchar(102) NOT NULL,
+  `user_name` varchar(32) NOT NULL UNIQUE,
+  `email` varchar(52) NOT NULL UNIQUE,
+  `mdp` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +42,7 @@ CREATE TABLE `utilisateur` (
 
 LOCK TABLES `utilisateur` WRITE;
 /*!40000 ALTER TABLE `utilisateur` DISABLE KEYS */;
-INSERT INTO `utilisateur` VALUES (1,'qf','fqd@gmail.com','qfd'),(2,'qfdfdf','fqdfqddf@gmail.com','df'),(3,'qfdfdfdd','fqdfqddfd@gmail.com','d'),(4,'qfdfdfdd','fqdfqddfdd@gmail.com','dd'),(5,'qfdfdfddss','fqdfqddfdssd@gmail.com','ss');
+INSERT INTO `utilisateur` VALUES (0, "admin", "josoajuliano@gmail.com", "438d7c38fd0d8c2e51df567a8d03f067cd3cc68448d88f25906325522fb232b29577f8ebcdae071aab73fbfcd8e883a6bf1f2d7ebf2526ba3751ffe960191c4c");
 /*!40000 ALTER TABLE `utilisateur` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

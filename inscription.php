@@ -1,7 +1,8 @@
 <?php
+    require_once('conf.php');
     try
     {
-        $bdd = new PDO('mysql:host=localhost;dbname=gestion_staock', 'sserver', 'sserver');
+        $bdd = new PDO("mysql:host=$hn;dbname=$db", $un, $pw);
     }
     catch (Exception $e)
     {
@@ -15,9 +16,9 @@
             if($_POST["pass"]==$_POST["confirm-pass"])
             {
                 $insertion = $bdd->prepare("INSERT INTO utilisateur(user_name, email, mdp) VALUES(?,?,?)");
-                $insertion->execute(array($_POST["username"], $_POST["mail"], $_POST["pass"]));
+                $insertion->execute(array($_POST["username"], $_POST["mail"], hash("sha512", $_POST["pass"])));
                 $insertion->closeCursor();
-                
+                echo "Inscription reussi avec succes!!!";
                 //header('Location: index.html');
             }
             else
