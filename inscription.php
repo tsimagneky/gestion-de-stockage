@@ -1,5 +1,6 @@
 <?php
     require_once('conf.php');
+    $uname="";
     try
     {
         $bdd = new PDO("mysql:host=$hn;dbname=$db", $un, $pw);
@@ -18,12 +19,15 @@
                 $insertion = $bdd->prepare("INSERT INTO utilisateur(user_name, email, mdp) VALUES(?,?,?)");
                 $insertion->execute(array($_POST["username"], $_POST["mail"], hash("sha512", $_POST["pass"])));
                 $insertion->closeCursor();
-                echo "Inscription reussi avec succes!!!";
-                //header('Location: index.html');
+                echo "<script>alert('Inscription reussi avec succes!!!');</script>";
+                header('Location: index.php');
+                $uname = $_POST["username"]
             }
             else
             {
-                echo'Le mot de passe de confirmation est incorrecte';
+                echo "<script>alert('Le mot de passe de confirmation est incorrecte');</script>";
+                header('Location: inscr.php');
+                $uname="";
             }
         }
         else

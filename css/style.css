@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(186, 235, 186);
+    background-color: white;
 }
 
 input {
@@ -7,7 +7,7 @@ input {
 }
 
     .conteneur1{
-        background-color: lightblue;
+        background-color: #ececfa;
         display:block;
         height:500px;
         width:500px;
@@ -23,7 +23,7 @@ input {
         position:relative; margin-left:14%; margin-top:4%;
         font-family:"TeX Gyres Heros";
         font-size:50px;
-        color:orange;
+        color: #19e5e5;
         opacity:1;
         display:block;
         }
@@ -71,7 +71,7 @@ input {
     .login{
         position:relative; margin-left:28%; margin-top:4%;
         color:white;
-        background-color:orange;
+        background-color:#19e5e5;
         font-family:"TeX Gyres Heros";
         font-size:20px;
         border:none;
@@ -126,7 +126,7 @@ input {
         display: inline;
     }
     .conteneur2{
-        background-color: lightblue;
+        background-color: #ececfa;
         overflow:hidden;
         display:block;
         height:500px;
