@@ -11,6 +11,31 @@
 	<title> Bienvenue Chez MadaShop</title>
 </head>
 <body>
+    <?php
+    session_start();
+    require_once('conf.php');
+    try
+    {
+        $bdd = new PDO("mysql:host=$hn;dbname=$db", $un, $pw);
+    }
+    catch (Exception $e)
+    {
+        die('Erreur : '.$e->getMessage());
+    }
+    
+
+    if((isset($_SESSION['user_name'])||isset($_SESSION['email']))&&(isset($_SESSION['mdp'])))
+    {
+        $info_user = $bdd->prepare("SELECT * from utilisateur WHERE user_name=?");
+        $info_user->execute(array($_SESSION['user_name']));
+        $exista = $info_user->rowCount();
+        if($exista==1)
+        {
+            $info_user = $info_user->fetch();
+            $_SESSION['id']=$info_user['id'];
+        }
+    }
+    ?>
     <section>
         <!-- Ceci est la premiere section de la page -->
         <div class="section1">
@@ -23,7 +48,7 @@
                 <a class="submenu">Armoires</a>
                 <a class="submenu">Canapés</a>
                 <a class="submenu">Chaises</a>
-                <a class="submenu">Electromenagers</a>
+                <a class="submenu">Electroménagers</a>
                 <a class="submenu">Lampes</a>
                 <a class="submenu">Tables</a>
                 <a class="submenu">Ustencils de cuisine</a>
@@ -35,11 +60,24 @@
 
         <!-- Ceci est la deuxieme section de la page -->
         <div class="section2">
-            <a href="inscr.php" class="connect">Se connecter/S'inscrire</a>
-            <input type="text" placeholder="chercher" class="txtsrch"><button type="button" class="btnsrch">Chercher</button>
             
-            <img src="images/appel.png" class="icon-appel">
-            <span class="no-tel">+261 32 98 681 22</span>
+                <?php
+                if(isset($_SESSION['id']))
+                {
+                    echo $_SESSION['user_name'];
+                    echo '<span class="no-tel1"><img src="images/appel.png" class="icon-appel">+261 32 98 681 22</span>';
+                    echo "<a href='se_deconnecter.php' class='se_deconnecter'>Déconnexion</a>";
+                }
+                else
+                {
+                    echo "<a href='inscr.php' class='connect'>Se connecter/S inscrire</a>";
+                    echo '<span class="no-tel"><img src="images/appel.png" class="icon-appel">+261 32 98 681 22</span>';
+                }
+                ?>
+
+            <span class="chercher"><input type="text" placeholder="chercher" class="txtsrch"><button type="button" class="btnsrch">Chercher</button></span>
+            
+            
 
             <nav>
                 <a class="menu-item">Acceuil</a>
@@ -104,5 +142,7 @@
         //*/
 
     </script>
+
+
 </body>
 </html>

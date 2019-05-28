@@ -1,6 +1,6 @@
 <?php
     $hn="localhost";
-    $un="stock";
-    $pw="stocks";
-    $db="stock";
+    $un="sserver";
+    $pw="sserver";
+    $db="gestion_staock";
 ?>

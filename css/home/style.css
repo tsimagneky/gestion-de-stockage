@@ -91,8 +91,29 @@ section {
 }
 
 .no-tel {
-    font-size:1.4vw;
+    font-size:1.1vw;
     font-family: fantasy;
+    position: absolute;
+    left:83%;
+    top:7%;
+    right:1%;
+}
+.no-tel1{
+    font-size:1.1vw;
+    font-family: fantasy;
+    position: absolute;
+    left:83%;
+    top:4%;
+    right:1%;
+}
+
+.se_deconnecter{
+    text-decoration: none;
+    font-size: 20px;
+    color: red;
+    position:absolute;
+    left:86%;
+    top:8%;
 }
 
 nav {
@@ -214,6 +235,7 @@ nav {
     text-decoration: none;
     font-size: 20px;
     color: red;
+
 }
 
 /* *********  */

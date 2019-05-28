@@ -14,6 +14,7 @@
 <?php
 require_once('conf.php');
 $erreur = '';
+session_start();
 if(isset($_POST["connection"]))
 {
     if(isset($_POST["user"]))
@@ -32,12 +33,16 @@ if(isset($_POST["connection"]))
             $recupere_bdd = $bdd -> query('SELECT user_name, email, mdp from utilisateur');
             while($ligne_bdd = $recupere_bdd->fetch())
             {
-                if(($_POST["user"]==$ligne_bdd["user_name"])||($_POST["user"]==$ligne_bdd["emai"]))
+                if(($_POST["user"]==$ligne_bdd["user_name"])||($_POST["user"]==$ligne_bdd["email"]))
                 {
                     $user_correcte = true;
                     if( hash("sha512", $_POST["password"]) == $ligne_bdd["mdp"])
                     {
-                        header('Location: home.php');    
+                        $_SESSION['user_name']=$ligne_bdd["user_name"];
+                        $_SESSION['email']=$ligne_bdd["email"];
+                        $_SESSION['mdp']=$ligne_bdd["mdp"];
+
+                        header('Location: index.php');    
                     }
                     else
                     {

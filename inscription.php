@@ -21,7 +21,7 @@
                 $insertion->closeCursor();
                 echo "<script>alert('Inscription reussi avec succes!!!');</script>";
                 header('Location: index.php');
-                $uname = $_POST["username"]
+                $uname = $_POST["username"];
             }
             else
             {
